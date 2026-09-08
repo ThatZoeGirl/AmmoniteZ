@@ -1,0 +1,11 @@
+CompileFlags:
+  Add:
+    - -std=c++17
+    - -I/usr/include/qt6
+    - -I/usr/include/qt6/QtCore
+    - -I/usr/include/qt6/QtQml
+    - -I/usr/include/qt6/QtNetwork
+    - -DQT_CORE_LIB
+    - -DQT_QML_LIB
+    - -DQT_NETWORK_LIB
+  Remove: [-mno-direct-extern-access]
