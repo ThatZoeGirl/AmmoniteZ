@@ -20,7 +20,7 @@ class Settings : public QObject {
   QML_SINGLETON
 
   Q_PROPERTY(Background *background READ bg CONSTANT)
-  Q_PROPERTY(QMap<QString, Screen> *screens READ screens CONSTANT)
+  Q_PROPERTY(Screens *screens READ screens CONSTANT)
 
 public:
   explicit Settings(QObject *parent = nullptr);
