@@ -12,6 +12,7 @@
 #include <qtmetamacros.h>
 
 #include "configs/background.h"
+#include "configs/screen.h"
 
 class Settings : public QObject {
   Q_OBJECT
@@ -19,6 +20,7 @@ class Settings : public QObject {
   QML_SINGLETON
 
   Q_PROPERTY(Background *background READ bg CONSTANT)
+  Q_PROPERTY(QMap<QString, Screen> *screens READ screens CONSTANT)
 
 public:
   explicit Settings(QObject *parent = nullptr);
@@ -32,9 +34,11 @@ public:
   }
 
   Background *bg() const { return _background; }
+  Screens *screens() const { return _screens; }
 
 private:
   Background *_background;
+  Screens *_screens;
 };
 
 #endif
