@@ -1,11 +1,13 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import Quickshell
 import AmmoniteZ
 
 Item {
     id: root
-    property string source: Settings.background.active
+    required property ShellScreen screen
+    property string source: (Settings.screens.getScreen(screen.name).wallpaper != "global") ? Settings.background.getWallpaper(Settings.screens.getScreen(screen.name).wallpaper) : Settings.background.active
     property Image current
     property bool completed
 

@@ -18,10 +18,7 @@ class Background : public QObject {
 public:
   explicit Background(QObject *parent = nullptr);
 
-  QString active() const {
-    return (_wallpapers.contains(_active)) ? _wallpapers[_active].toString()
-                                           : QString();
-  }
+  QString active() { return getWallpaper(_active); }
 
   Q_INVOKABLE QString getWallpaper(QString name);
   Q_INVOKABLE void addWallpaper(QString name, QString path);
@@ -36,7 +33,6 @@ signals:
 private:
   QSettings *_settings;
   QString _active;
-  QVariantMap _wallpapers;
 };
 
 #endif

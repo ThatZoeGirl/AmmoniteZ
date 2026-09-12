@@ -1,6 +1,7 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <QMetaType>
 #include <QObject>
 #include <QSettings>
 #include <QString>
@@ -13,16 +14,17 @@ class Screen : public QObject {
   Q_OBJECT
   QML_ELEMENT
 
-  Q_PROPERTY(QString name READ name WRITE setName NOTIFY onNameChanged)
+  Q_PROPERTY(QString name READ name NOTIFY onNameChanged)
   Q_PROPERTY(bool shell READ shell WRITE setShell NOTIFY onShellChanged)
 
   Q_PROPERTY(bool background READ background WRITE setBackground NOTIFY
                  onBackgroundChanged)
   Q_PROPERTY(QString wallpaper READ wallpaper WRITE setWallpaper NOTIFY
-                 onWallpaperChnaged)
+                 onWallpaperChanged)
 
 public:
   explicit Screen(QObject *parent = nullptr);
+  explicit Screen(QString name, QObject *parent = nullptr);
 
   QString name();
 
@@ -31,22 +33,18 @@ public:
   bool background();
   QString wallpaper();
 
-  QVariant toVariant();
-  static Screen fromVariant();
-
 public slots:
-  void setName(const QString &name);
   void setShell(const bool &shell);
 
-  bool setBackground(const bool &background);
-  QString setWallpaper(const QString &wallpaper);
+  void setBackground(const bool &background);
+  void setWallpaper(const QString &wallpaper);
 
 signals:
   void onNameChanged();
   void onShellChanged();
 
   void onBackgroundChanged();
-  void onWallpaperWhanged();
+  void onWallpaperChanged();
 
 private:
   QString _name;
@@ -54,6 +52,8 @@ private:
 
   bool _background;
   QString _wallpaper;
+
+  QSettings *_settings;
 };
 
 class Screens : public QObject {
@@ -63,13 +63,13 @@ class Screens : public QObject {
 public:
   explicit Screens(QObject *parent = nullptr);
 
-  Q_INVOKABLE Screen getScreen(QString name);
-  Q_INVOKABLE void setScreen(QString name, Screen *screen);
+  Q_INVOKABLE Screen *getScreen(QString name);
+  Q_INVOKABLE void addScreen(QString name);
   Q_INVOKABLE void removeScreen(QString name);
 
 private:
   QSettings *_settings;
-  QMap<QString, Screen> _screens;
+  QList<Screen *> _screens;
 };
 
 #endif

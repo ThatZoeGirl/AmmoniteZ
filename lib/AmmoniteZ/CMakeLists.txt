@@ -6,6 +6,9 @@ qt_add_qml_module(AmmoniteZ
 
     configs/background.h
     configs/background.cpp
+
+    configs/screen.h
+    configs/screen.cpp
 )
 
 install(TARGETS AmmoniteZ

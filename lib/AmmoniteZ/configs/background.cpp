@@ -3,8 +3,6 @@
 Background::Background(QObject *parent) : QObject(parent) {
   _settings = new QSettings("Zoomi", "AmmoniteZ");
   _active = _settings->value("background/active", "default").toString();
-  _wallpapers =
-      _settings->value("background/wallpapers", QVariantMap()).toMap();
 }
 
 void Background::setActive(const QString &active) {
@@ -16,16 +14,14 @@ void Background::setActive(const QString &active) {
 }
 
 QString Background::getWallpaper(QString name) {
-  return (_wallpapers.contains(name)) ? _wallpapers[name].toString()
-                                      : QString();
+  return _settings->value("background/wallpapers/" + name, "default")
+      .toString();
 }
 
 void Background::addWallpaper(QString name, QString path) {
-  _wallpapers.insert(name, path);
-  _settings->setValue("background/wallpapers", _wallpapers);
+  _settings->setValue("background/wallpapers/" + name, path);
 }
 
 void Background::removeWallpaper(QString name) {
-  _wallpapers.remove(name);
-  _settings->setValue("background/wallpapers", _wallpapers);
+  _settings->remove("background/wallpapers/" + name);
 }

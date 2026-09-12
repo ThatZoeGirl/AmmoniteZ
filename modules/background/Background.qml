@@ -1,14 +1,15 @@
+pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import AmmoniteZ
 
 import "../../components/"
-import "../../services/"
 
 import "./"
 
 Variants {
-    model: Screens.screens
+    model: Quickshell.screens
 
     StyledWindow {
         id: win
@@ -18,8 +19,8 @@ Variants {
         screen: modelData
 
         WlrLayershell.exclusionMode: ExclusionMode.Ignore
-        WlrLayershell.layer: WlrLayer.Background
-        color: "black"
+        WlrLayershell.layer: (Settings.screens.getScreen(modelData.name).background) ? WlrLayer.Background : WlrLayer.Bottom
+        color: (Settings.screens.getScreen(modelData.name).background) ? "black" : "transparent"
         surfaceFormat.opaque: false
 
         anchors {
@@ -39,9 +40,11 @@ Variants {
                 asynchronous: true
 
                 anchors.fill: parent
-                active: true
+                active: Settings.screens.getScreen(win.modelData.name).background
 
-                sourceComponent: Wallpaper {}
+                sourceComponent: Wallpaper {
+                    screen: win.modelData
+                }
             }
         }
     }
