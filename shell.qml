@@ -3,6 +3,7 @@ import QtQuick
 import AmmoniteZ
 
 import "./modules/background/"
+import "./modules/bar/"
 
 ShellRoot {
     id: root
@@ -21,5 +22,10 @@ ShellRoot {
     Loader {
         active: root.screensReady
         sourceComponent: Background {}
+    }
+
+    Loader {
+        active: root.screensReady
+        sourceComponent: Bar {}
     }
 }

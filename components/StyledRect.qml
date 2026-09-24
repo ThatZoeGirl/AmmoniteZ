@@ -1,11 +1,9 @@
 import QtQuick
 
-import "../services"
-
 Rectangle {
     id: root
 
-    color: Config.colours.surface0
+    color: "#3E2E28"
     radius: 12
 
     Behavior on x {
