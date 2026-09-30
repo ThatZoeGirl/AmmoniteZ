@@ -8,6 +8,7 @@ import AmmoniteZ
 import "../../components/"
 
 import "left/"
+import "center/"
 import "right/"
 
 Variants {
@@ -41,7 +42,7 @@ Variants {
         }
 
         mask: Region {
-            regions: [menuOpener.area, clock.area]
+            regions: [menuOpener.area, clock.area, dynamicisland.area]
         }
 
         Item {
@@ -62,6 +63,19 @@ Variants {
 
                     property Region area: Region {
                         item: menuOpener
+                    }
+                }
+            }
+
+            Row {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+
+                DynamicIsland {
+                    id: dynamicisland
+
+                    property Region area: Region {
+                        item: dynamicisland
                     }
                 }
             }

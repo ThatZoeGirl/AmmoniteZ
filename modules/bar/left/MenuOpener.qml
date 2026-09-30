@@ -26,10 +26,6 @@ StyledRect {
                 spring: 2
                 damping: 0.3
                 duration: 250
-
-                onRunningChanged: {
-                    console.log("state: " + running);
-                }
             }
         }
 

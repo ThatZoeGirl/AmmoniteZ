@@ -3,7 +3,7 @@ import QtQuick
 Rectangle {
     id: root
 
-    color: "#3E2E28"
+    color: "#1B1D40"
     radius: 12
 
     Behavior on x {
