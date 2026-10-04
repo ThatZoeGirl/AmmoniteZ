@@ -20,7 +20,7 @@ StyledRect {
 
         Text {
             id: innerText
-            text: Hyprland.activeToplevel.title
+            text: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : "AmmoniteZ"
 
             font.bold: true
             font.pixelSize: 13

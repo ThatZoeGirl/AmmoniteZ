@@ -42,7 +42,7 @@ Variants {
         }
 
         mask: Region {
-            regions: [menuOpener.area, clock.area, dynamicisland.area]
+            regions: [menuOpener.area, clock.area, dynamicisland.area, notif.area, notifQue.area]
         }
 
         Item {
@@ -58,6 +58,7 @@ Variants {
             Row {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
+
                 MenuOpener {
                     id: menuOpener
 
@@ -68,14 +69,26 @@ Variants {
             }
 
             Row {
+                spacing: 6
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
+
+                anchors.horizontalCenterOffset: menuOpener.implicitWidth / 2 + spacing / 2
 
                 DynamicIsland {
                     id: dynamicisland
 
                     property Region area: Region {
                         item: dynamicisland
+                    }
+                }
+
+                Notification {
+                    id: notif
+
+                    property Region area: Region {
+                        item: notif
                     }
                 }
             }
@@ -90,6 +103,18 @@ Variants {
                     property Region area: Region {
                         item: clock
                     }
+                }
+            }
+
+            NotifQue {
+                id: notifQue
+
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.bottom
+                anchors.margins: 6
+
+                property Region area: Region {
+                    item: notifQue
                 }
             }
         }
